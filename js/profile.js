@@ -45,7 +45,7 @@ function getDataUser (id) {
             <h6 id="user_Name">${info.name === null ? "" : info.name}</h6>
             
             <div class=''>
-          <button class='btn btn-edit-profile ' onclick='editProfile(${decodeURIComponent(JSON.stringify(info))})'>
+          <button class='btn btn-edit-profile disabled' onclick='editProfile(${decodeURIComponent(JSON.stringify(info))})'>
           <i class="fa-regular fa-pen-to-square"></i>
           Edit Profile</button>
           </div>
