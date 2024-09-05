@@ -117,7 +117,7 @@ body.scroll {
 
 .btn {
   border: none;
-  padding: .5rem 1.1rem;
+  padding: .4rem 1rem;
   font-weight: 300;
   border-radius: .5rem;
   font-size: .9rem;
@@ -309,10 +309,21 @@ color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index:4;
 }
 
 .logo-icon {
-  width: 55px;
+  width: 45px;
+  
+}
+.logo>a::after {
+  content: '';
+  position: absolute;
+  width: 80% ;
+  height: 80%;
+  background-color: var(--white);
+  z-index: -1;
 }
 
 .lists>ul {
@@ -322,15 +333,19 @@ color: var(--accent);
 }
 
 .lists>ul>li>a {
+  font-size: 1.4rem;
   padding: .4rem .8rem;
   border-radius: .5rem;
+  color: var(--primary);
+  opacity: .8;
   transition: var(--transition) ease-in-out;
 }
 
 .lists>ul>li>a.active,
 .lists>ul>li>a:hover {
-  background-color: var(--primary);
-  color: var(--white);
+  opacity: 1;
+  border-bottom: .1rem solid var(--accent);
+  color: var(--accent);
 
 }
 
@@ -419,8 +434,11 @@ color: var(--accent);
 
 @media (width < 540px) {
 
+  .user__login .user .username {
+    display: none;
+  }
 
-  .lists {
+  /* .lists {
     position: fixed;
     z-index: -1;
     top: -100%;
@@ -454,7 +472,7 @@ color: var(--accent);
 
   .bar {
     display: block;
-  }
+  } */
 }
 
 
@@ -483,10 +501,11 @@ main {
 }
 
 .card {
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  background-color: var(--primary5-light);
-  border-radius: .5rem;
+  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
+  /* background-color: var(--primary5-light); */
+  /* border-radius: .5rem; */
   margin-bottom: 1.1rem;
+  border-bottom: .1rem solid var(--static);
 
 }
 
@@ -496,7 +515,7 @@ main {
   justify-content: space-between;
   padding: .5rem .8rem;
   gap: .5rem;
-  border-bottom: var(--secondary) .1rem solid;
+  /* border-bottom: var(--secondary) .1rem solid; */
   cursor: pointer;
   /* margin-bottom: .4rem; */
 }
@@ -517,9 +536,14 @@ main {
   width: 100%;
 }
 
-.header__card>p {
+.header__card p {
   font-weight: 700;
   font-size: .9rem;
+  line-height: 1.5;
+}
+.header__card .timepost  {
+  font-size: 0.6rem;
+  opacity: .5;
 }
 .settingsPost {
   position: relative;
@@ -529,8 +553,9 @@ main {
 .settingsPost > div {
   position: absolute;
   content: '';
-  right: 5px;
+  right: 20px;
   top: -15px;
+  z-index: 18;
   background-color: var(--bg);
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: .5rem;
@@ -574,19 +599,23 @@ main {
   overflow: hidden;
   border-radius: .5rem;
   /* background-image: url(http://tarmeezacademy.com/images/posts/0Az3YSyItEULQ8L.jpg); */
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-left: 5.6rem;
 
 }
-
+.cardPost  {
+  width: 700px;
+}
 .description__card {
   padding: .4rem;
+  padding-left: 3.5rem;
 }
 
 .description__card>:nth-child(1) {
   font-size: .8rem;
-  opacity: 0.6;
+  opacity: .7;
   font-weight: 500;
 }
 
@@ -595,6 +624,12 @@ main {
   font-size: 1rem;
   border-bottom: 0;
   line-height: 1.2;
+  display: -webkit-box;
+  width:750px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis
 
 }
 
@@ -603,7 +638,7 @@ main {
   line-height: 20px;
   padding-bottom: .4rem;
   font-size: 0.9rem;
-  border-bottom: .1rem var(--secondary) solid;
+  
 }
 
 /* .dark .description__card > :nth-child(2) {
@@ -613,6 +648,8 @@ main {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  margin-top: .8rem;
+  padding-left: 9rem;
 }
 
 .footer__card>p {
@@ -652,6 +689,7 @@ main {
 
 .comments {
   padding: 0.6rem;
+
 }
 
 .header_comment {
@@ -659,7 +697,9 @@ main {
   align-items: center;
   gap: .5rem;
 }
-
+.comment {
+  padding-inline: .8rem;
+}
 .comment:not(:last-of-type) {
   padding-block: .2rem;
   border-bottom: .1rem solid var(--secondary);
@@ -780,6 +820,11 @@ main {
   border-color: var(--accent);
 }
 /* media add post */
+@media (width < 790px) {
+  .cardPost {
+    margin-left: 0;
+  }
+}
 @media (width < 540px) {
   .btn_Add_post {
 
@@ -793,10 +838,37 @@ main {
   .input-field.post > input {
     width: 300%;
   }
+  .body__card>.image__card {
+    margin-left: .2rem;
+  }
+  .cardPost {
+   
+    width: 300px;
+    margin-left: .2rem;
+  }
 }
 @media (width < 360px) {
   .addpost {
     width: 305px;
+  }
+   .body__card>.image__card {
+   
+    margin-left: .2rem;
+  }
+  .cardPost {
+    margin-left: .2rem;
+    width: 300px;
+  }
+} 
+@media (width < 330px) {
+ 
+  .body__card>.image__card {
+    
+    margin-left: .2rem;
+  }
+  .cardPost {
+    margin-left: .2rem;
+    width: 270px;
   }
 } 
 
@@ -1228,16 +1300,24 @@ form.sign-up-form {
 }
 
 /* page profile */
+.containerProfile {
+  display: flex;
+  gap: .5rem;
+  overflow: hidden;
+
+}
 .profile {
-  background-color: var(--primary5-light);
   padding: .9rem;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: .5rem;
   display: flex;
+  flex-direction: column;
+  border-right: .1rem solid var(--static);
 }
 
 .profile>div {
-  width: calc(100% / 2);
+  /* width: calc(100% / 2); */
+  display: flex;
+  flex-direction: column;
 }
 
 .profile .left .image_user {
@@ -1267,10 +1347,14 @@ form.sign-up-form {
 .profile .right>div>div>span {
   font-size: .9rem;
 }
+.cardsProfile {
+  width: 85%;
+}
 
 .title_user {
   margin-block: .8rem;
-  padding: .5rem;
+  padding-left: 1.2rem;
+  
 }
 
 .profileEdit {
@@ -1306,12 +1390,24 @@ form.sign-up-form {
  .edit-profile  form {
   padding: 0;
  }
- 
+ @media (width < 890px) {
+  .cardsProfile {
+    width: 65%;
+  }
+ }
 @media (width < 540px) {
-  .profile {
+  .containerProfile {
     flex-direction: column;
   }
+  .profile {
+    flex-direction: column;
+    border-right: 0;
+    border-bottom: .1rem solid var(--static);
+  }
   .profile>div {
+    width: 100%;
+  }
+  .profile .left .info_user {
     width: 100%;
   }
   .right>div {
@@ -1322,11 +1418,17 @@ form.sign-up-form {
   .edit-profile {
     width: 355px;
   }
+  .cardsProfile {
+    width: 100%;
+  }
   
 }
 @media (width < 330px) {
   .edit-profile {
     width: 255px;
+  }
+  .cardsProfile {
+    width: 100%;
   }
   
 }

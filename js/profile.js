@@ -24,6 +24,7 @@ function getInfoUser (id) {
 
 function getDataUser (id) {
   let url = `${baseURl}users/${id}` 
+  let userId = JSON.parse(localStorage.getItem('user'))
   document.querySelector('.loader').style.display='block'
   document.querySelector('.profile').style.display='none'
   axios.get(`${url}`)
@@ -44,8 +45,9 @@ function getDataUser (id) {
             <h5 id="userName">${info.username === null ? "" : info.username}</h5>
             <h6 id="user_Name">${info.name === null ? "" : info.name}</h6>
             
+            
             <div class=''>
-          <button class='btn btn-edit-profile ' onclick='editProfile(${decodeURIComponent(JSON.stringify(info))})'>
+          <button class='btn btn-edit-profile disabled' onclick='editProfile(${decodeURIComponent(JSON.stringify(info))})'>
           <i class="fa-regular fa-pen-to-square"></i>
           Edit Profile</button>
           </div>
@@ -96,50 +98,53 @@ function getPostsUser (id) {
           let  content = `
           <div class="card" >
 
-         
-     <div class="header__card">
+           <div class="header__card">
           <div onclick='getProfile(${user.id})' >
             <div class="img__user">
               <img src="${Object.values(user.profile_image).length === 0 ? 'assets/image/user.jpg' : user.profile_image  }" alt="">
             </div>
+              <div>
               <p>${user.name}</p>
+              <p class='timepost'> <span>${post.created_at}</span> </p>
+              </div>
+
           </div>
           ${
-            userId === null ? '' : 
-            user.id === userId.id ? 
+           userId === null ? '' : 
+
+           user.id === userId.id ? 
             
-            ` <div class="settingsPost">
-              <i class="fa-solid fa-ellipsis-vertical"></i>
-              <div>
-                <div class="edit" onclick='editPost(${decodeURIComponent(JSON.stringify(post))})' >
-                  <i class="fa-regular fa-pen-to-square"></i>
-                  <span >Edit</span>
-                </div>
-                <div class="delete" onclick='deletePostId(${decodeURIComponent(JSON.stringify(post))})'>
-                  <i class="fa-regular fa-trash-can"></i>
-                   <span >Delete</span>
-                </div>
-              </div>
-            </div>
-            `
-            
-            : ''
+           ` <div class="settingsPost">
+             <i class="fa-solid fa-ellipsis"></i>
+             <div>
+               <div class="edit" onclick='editPost(${decodeURIComponent(JSON.stringify(post))})'>
+                 <i class="fa-regular fa-pen-to-square"></i>
+                 <span >Edit</span>
+               </div>
+               <div class="delete" onclick='deletePostId(${decodeURIComponent(JSON.stringify(post))})'>
+                 <i class="fa-regular fa-trash-can"></i>
+                 <span >Delete</span>
+               </div>
+             </div>
+           </div>
+           `
+           
+           : ''
             
             
           }
            
           </div>
-
-          <div class="body__card" onclick='getpost(${post.id})' >
-            <div class="image__card" style="background-image: url(${post.image}); ${Object.values(post.image).length === 0 ? 'height: 0px;' : 'height: 400px;'} ">
-            </div>
-           <div class="description__card">
-            <p><span>${post.created_at}</span> </p>
-            <p>${post.title}</p>
+          <div class="description__card">
+            <p>${post.title === null ? '' : post.title}</p>
             <p>${post.body}</p>
            </div>
+          <div class="body__card" onclick='getpost(${post.id})' >
+            <div class="image__card " style="background-image: url(${post.image}); ${Object.values(post.image).length === 0 ? 'height: 0px;' : 'height: 400px;'} ">
+            </div>
+           
            <div class="footer__card">
-            <p><i class="fa-solid fa-pen"></i> ${post.comments_count} Comments</p>
+            <p>${post.comments_count} <i class="fa-regular fa-comment"></i></p>
             <ul class='listTags'>
            ${
             Object.values(tag).length === 0 ? 

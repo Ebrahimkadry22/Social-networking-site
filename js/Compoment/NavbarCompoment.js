@@ -12,8 +12,8 @@ class NavbarCompoment extends HTMLElement {
         </div>
         <div class="lists ">
           <ul>
-            <li><a href="index.html" class=" ${this.getAttribute('active') === '/' ? 'active' : null}">Home</a></li>
-            <li ><a class='linkProfile ${this.getAttribute('active') === '/profile.html' ? 'active' : null}' href="/profile.html">Profile</a></li>
+            <li><a href="index.html" class=" ${this.getAttribute('active') === '/' ? 'active' : null}"><i class="fa-solid fa-house"></i></a></li>
+           
           </ul>
         </div>
         <div class="left">
@@ -28,14 +28,16 @@ class NavbarCompoment extends HTMLElement {
           </div>
 
           <div class="user__login">
+            <a class='linkProfile' href="/profile.html">
             <div class="user">
               <i class="fa-solid fa-user"></i>
               <img class="userProfile" src="" alt="">
               <span class="username">ibrahim</span>
             </div>
+            </a>
   
             <div class="logout">
-              <button class="btn btnRed ">Logout</button>
+              <button class="btn btnRed ">Log out</button>
             </div>
           </div>
 
