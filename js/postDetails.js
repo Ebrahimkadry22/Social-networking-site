@@ -76,7 +76,7 @@ function getpost (id) {
            </div>
           
           <div class="body__card"  >
-            <div class="image__card" style="background-image: url(${post.image}); ${Object.values(post.image).length === 0 ? 'height: 0px;' : 'height: 40rem;' + 'background-size: contain;'} ">
+            <div class="image__card" style="background-image: url(${post.image}); ${Object.values(post.image).length === 0 ? 'height: 0px;' : 'height: 400px;' + 'background-size: contain;'} ">
             </div>
            
            <div class="footer__card">
