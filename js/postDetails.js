@@ -30,7 +30,7 @@ function getpost(id) {
 
 
       const cardpost = `
-      <div class="cards" >
+      <div class="cards" ${commentsPost.length ? "" : "style='height: calc(100vh - 2vh);'"}>
           <div class="header__card">
           <div onclick='getProfile(${user.id})' >
             <div class="img__user">
@@ -91,16 +91,16 @@ function getpost(id) {
             </ul>
            </div>
           </div>
-          <div class="form_comment" >
+          <div class="form_comment"  >
           <input type="text" class="input_comment" id="commentInput" placeholder='comment as ${userComment}'>
           <button class="btn btn_send disabled" id="sendComment" data-id=${post.id}><i class="fa-regular fa-paper-plane"></i></button>
         </div>
-           <div class="comments">
+           <div class="comments" ${commentsPost.length ? "style='padding:.6rem 0;'" : ''} >
           ${commentsPost.length ?
 
           commentsPost.map(comment =>
             `
-              <div class="comment" >
+              <div class="comment"  >
             <div class="header_comment">
               <div class="image_user">
                 <img src="${Object.values(comment.author.profile_image).length === 0 ? 'assets/image/user.jpg' : comment.author.profile_image}" alt="">
@@ -118,7 +118,7 @@ function getpost(id) {
           :
 
           `
-            <p>Not comments</p>
+            <p class='notComment'>Not comments</p>
             `
         }
           </div>

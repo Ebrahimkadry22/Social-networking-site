@@ -64,7 +64,7 @@ formlogin.addEventListener('click', e => {
 // function signup
 function getSignUpFormErrors (userName,userEmail,password,conformPassword,image) {
 
-  let informationUser = {'username':'','name':'','email':'','password':'','conformPassword':'','profile_image':''}
+  let informationUser = {'username':'','name':'','email':'','password':'','conformPassword':''}
 
 if(userName === '' || userName === null ) {
   setErrorFor(usernameSignUp,'username requried')
@@ -76,7 +76,6 @@ if(userName === '' || userName === null ) {
 }
 
 setSuccessFor(imageSignUp)
-informationUser.profile_image=image
 
 if(userEmail === '' || userEmail === null){
   setErrorFor(emailSignUp,'email is required')
@@ -109,14 +108,17 @@ if(conformPassword === '' || conformPassword === null ) {
 
 let formData = new FormData()
 
+
 if( !(informationUser.username === '' || informationUser.userEmail === '' || informationUser.password === '' || informationUser.conformPassword === '')) {
 
+  if(image) {
+    formData.append('image',image)
+  }
   formData.append('name',informationUser.name)
   formData.append('username',informationUser.username)
   formData.append('email',informationUser.email)
-  formData.append('profile_image', formData.get('profile_image'));
   formData.append('password',informationUser.password)
-  // console.log('FormData:', formData.get('profile_image'));
+ 
   signApi('register',formData,'Successfully registered!')
   conformpasswordSignUp.value=''
   passwordSignUp.value=''

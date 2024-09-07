@@ -3,6 +3,7 @@
 :root {
   --text: #040316;
   --bg: #fbfbfe;
+  --container-main:rgba(221 , 219 , 255  , 10%);
   --primary: #272fce;
   --primary5-light: hsl(237, 68%, 48%, 5%);
   --secondary: #dddbff;
@@ -479,14 +480,16 @@ color: var(--accent);
 /* main */
 main {
   /* height: 600vh; */
-  margin-top: .8rem;
+  /* margin-top: .8rem; */
   position: relative;
   /* z-index: -40; */
 }
 
 .container__main {
-  margin-top: .4rem;
-  /* padding: 1rem; */
+  margin-top: .6rem;
+    /* background-color: var(--container-main);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
+    
 }
 
 .postDetails {
@@ -496,24 +499,30 @@ main {
 
 .cards {
   overflow: hidden;
-  /* padding: .5rem; */
+  padding: .5rem;
+  background-color: var(--container-main);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    /* padding-block: .6rem; */
+    border-radius: .5rem;
 
 }
-
 .card {
   /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
   /* background-color: var(--primary5-light); */
   /* border-radius: .5rem; */
+  /* margin-bottom: 1.1rem;
+  border-bottom: .1rem solid var(--static); */
+}
+ .card:not(:last-child)  {
   margin-bottom: 1.1rem;
   border-bottom: .1rem solid var(--static);
-
 }
 
 .header__card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .5rem .8rem;
+  /* padding: .5rem .8rem; */
   gap: .5rem;
   /* border-bottom: var(--secondary) .1rem solid; */
   cursor: pointer;
@@ -534,6 +543,8 @@ main {
 
 .header__card > div .img__user>img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .header__card p {
@@ -590,7 +601,7 @@ main {
   background-color: var(--red);
 }
 .body__card {
-  padding: .6rem;
+  /* padding: .6rem; */
   cursor: pointer;
 }
 
@@ -602,7 +613,7 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin-left: 5.6rem;
+  /* margin-left: 5.6rem; */
 
 }
 .cardPost  {
@@ -610,7 +621,7 @@ main {
 }
 .description__card {
   padding: .4rem;
-  padding-left: 3.5rem;
+  padding-left: 3rem;
 }
 
 .description__card>:nth-child(1) {
@@ -625,7 +636,7 @@ main {
   border-bottom: 0;
   line-height: 1.2;
   display: -webkit-box;
-  width:750px;
+  /* width:750px; */
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -688,8 +699,14 @@ main {
 }
 
 .comments {
-  padding: 0.6rem;
+  padding: 0 0.6rem;
+  
 
+}
+.notComment {
+  line-height: 0;
+  text-align: center;
+  padding-block: .5rem;
 }
 
 .header_comment {
@@ -697,8 +714,9 @@ main {
   align-items: center;
   gap: .5rem;
 }
-.comment {
-  padding-inline: .8rem;
+
+.comment:not(:last-child) {
+  margin-bottom: .5rem;
 }
 .comment:not(:last-of-type) {
   padding-block: .2rem;
@@ -1304,7 +1322,7 @@ form.sign-up-form {
   display: flex;
   gap: .5rem;
   overflow: hidden;
-
+  padding-block: .5rem;
 }
 .profile {
   padding: .9rem;
@@ -1312,6 +1330,7 @@ form.sign-up-form {
   display: flex;
   flex-direction: column;
   border-right: .1rem solid var(--static);
+  
 }
 
 .profile>div {
@@ -1330,6 +1349,8 @@ form.sign-up-form {
 
 .profile .left .image_user>img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .profile .left .info_user h4,
@@ -1347,14 +1368,12 @@ form.sign-up-form {
 .profile .right>div>div>span {
   font-size: .9rem;
 }
-.cardsProfile {
-  width: 85%;
-}
+
 
 .title_user {
   margin-block: .8rem;
   padding-left: 1.2rem;
-  
+  text-align: center;
 }
 
 .profileEdit {
@@ -1390,11 +1409,10 @@ form.sign-up-form {
  .edit-profile  form {
   padding: 0;
  }
- @media (width < 890px) {
-  .cardsProfile {
-    width: 65%;
-  }
- }
+ .containerProfile > div:nth-of-type(2) {
+ width: 100%;
+}
+
 @media (width < 540px) {
   .containerProfile {
     flex-direction: column;
@@ -1418,17 +1436,13 @@ form.sign-up-form {
   .edit-profile {
     width: 355px;
   }
-  .cardsProfile {
-    width: 100%;
-  }
+  
   
 }
 @media (width < 330px) {
   .edit-profile {
     width: 255px;
   }
-  .cardsProfile {
-    width: 100%;
-  }
+
   
 }
