@@ -4,8 +4,8 @@ const id = urlparams.get("postId")
 
 const postElemant = document.querySelector('.post')
 const token = localStorage.getItem('token')
-const userLogin = JSON.parse(localStorage.getItem('user')) 
-let userComment =''
+const userLogin = JSON.parse(localStorage.getItem('user'))
+let userComment = ''
 userLogin ? userComment = userLogin.name : ''
 
 
@@ -17,24 +17,24 @@ userLogin ? userComment = userLogin.name : ''
 
 
 
-function getpost (id) {
+function getpost(id) {
   axios.get(`${baseURl}posts/${id}`)
-  .then((response)=> {
-    let post = response.data.data
-    let commentsPost = post.comments
-    let user = post.author
-    let tag = post.tags
-    let userId = JSON.parse(localStorage.getItem('user'))
+    .then((response) => {
+      let post = response.data.data
+      let commentsPost = post.comments
+      let user = post.author
+      let tag = post.tags
+      let userId = JSON.parse(localStorage.getItem('user'))
 
 
-    
-    
-    const cardpost = `
+
+
+      const cardpost = `
       <div class="cards" >
           <div class="header__card">
           <div onclick='getProfile(${user.id})' >
             <div class="img__user">
-              <img src="${Object.values(user.profile_image).length === 0 ? 'assets/image/user.jpg' : user.profile_image  }" alt="">
+              <img src="${Object.values(user.profile_image).length === 0 ? 'assets/image/user.jpg' : user.profile_image}" alt="">
             </div>
               <div>
               <p>${user.name}</p>
@@ -42,12 +42,11 @@ function getpost (id) {
               </div>
 
           </div>
-          ${
-           userId === null ? '' : 
+          ${userId === null ? '' :
 
-           user.id === userId.id ? 
-            
-           ` <div class="settingsPost">
+          user.id === userId.id ?
+
+            ` <div class="settingsPost">
              <i class="fa-solid fa-ellipsis"></i>
              <div>
                <div class="edit" onclick='editPost(${decodeURIComponent(JSON.stringify(post))})'>
@@ -61,11 +60,11 @@ function getpost (id) {
              </div>
            </div>
            `
-           
-           : ''
-            
-            
-          }
+
+            : ''
+
+
+        }
            
           </div>
         
@@ -82,16 +81,13 @@ function getpost (id) {
            <div class="footer__card">
             <p>${post.comments_count} <i class="fa-regular fa-comment"></i></p>
             <ul class='listTags'>
-           ${
-           
-            
-            Object.values(tag).length === 0 ? 
-            ''
-            :
-            tag.map(tag=> 
-              `<li><a href="#">${tag.name}</a></li>`
-            ).join('') 
-           }
+           ${Object.values(tag).length === 0 ?
+          ''
+          :
+          tag.map(tag =>
+            `<li><a href="#">${tag.name}</a></li>`
+          ).join('')
+        }
             </ul>
            </div>
           </div>
@@ -100,14 +96,14 @@ function getpost (id) {
           <button class="btn btn_send disabled" id="sendComment" data-id=${post.id}><i class="fa-regular fa-paper-plane"></i></button>
         </div>
            <div class="comments">
-          ${commentsPost.length ? 
+          ${commentsPost.length ?
 
-            commentsPost.map(comment =>
-              `
+          commentsPost.map(comment =>
+            `
               <div class="comment" >
             <div class="header_comment">
               <div class="image_user">
-                <img src="${Object.values(comment.author.profile_image).length === 0 ? 'assets/image/user.jpg' : comment.author.profile_image  }" alt="">
+                <img src="${Object.values(comment.author.profile_image).length === 0 ? 'assets/image/user.jpg' : comment.author.profile_image}" alt="">
               </div>
               <p>${comment.author.username}</p>
             </div>
@@ -116,15 +112,15 @@ function getpost (id) {
             </div>
           </div>
               `
-            ).join('')
-            
-            
-            :
-            
-            `
+          ).join('')
+
+
+          :
+
+          `
             <p>Not comments</p>
             `
-          }
+        }
           </div>
 
             
@@ -133,54 +129,54 @@ function getpost (id) {
         </div>
         </div>
     `
-    
- 
-    if(post) {
-      postElemant.innerHTML=cardpost
-      
-    }else {
-      postElemant.innerHTML=``
-      loader(true)
 
 
-    }
-    const commentInput = document.getElementById('commentInput')
-    const sendComment = document.getElementById("sendComment")
-    
-  
-  commentInput.addEventListener('input', checkInput);
-  sendComment.addEventListener('touchstart', checkInput);
-  sendComment.addEventListener('click',()=> {
-    const bodyComment = commentInput.value;
-    
-    let params = {
-      'body':bodyComment
-    }
+      if (post) {
+        postElemant.innerHTML = cardpost
 
-    let token = localStorage.getItem("token")
-    let url = `${baseURl}posts/${id}/comments`
-    
-    sendDataApi(url,params,token)
-    localStorage.setItem('CommentAdded','true')
-    
-    
-    
-    
-  })
-  const comment = document.querySelector('.form_comment')
+      } else {
+        postElemant.innerHTML = ``
+        loader(true)
 
-  if(token === null || user === null) { 
-    comment.style.display='none'
-    
-  }
-    
 
-    
-  }).catch((error)=> {
-    window.location='index.html'
-    
-  })
-  
+      }
+      const commentInput = document.getElementById('commentInput')
+      const sendComment = document.getElementById("sendComment")
+
+
+      commentInput.addEventListener('input', checkInput);
+      sendComment.addEventListener('touchstart', checkInput);
+      sendComment.addEventListener('click', () => {
+        const bodyComment = commentInput.value;
+
+        let params = {
+          'body': bodyComment
+        }
+
+        let token = localStorage.getItem("token")
+        let url = `${baseURl}posts/${id}/comments`
+
+        sendDataApi(url, params, token)
+        localStorage.setItem('CommentAdded', 'true')
+
+
+
+
+      })
+      const comment = document.querySelector('.form_comment')
+
+      if (token === null || user === null) {
+        comment.style.display = 'none'
+
+      }
+
+
+
+    }).catch((error) => {
+      window.location = 'index.html'
+
+    })
+
 
 }
 
@@ -188,25 +184,25 @@ getpost(id)
 
 function checkInput() {
   if (commentInput.value.trim() === '') {
-      sendComment.classList.add('disabled');
+    sendComment.classList.add('disabled');
   } else {
-      sendComment.classList.remove('disabled');
-      
+    sendComment.classList.remove('disabled');
+
   }
 }
 
-function sendDataApi (url,params,token) {
+function sendDataApi(url, params, token) {
 
-  axios.post(url,params,{
-    headers : {
-      'authorization':`Bearer ${token}`
+  axios.post(url, params, {
+    headers: {
+      'authorization': `Bearer ${token}`
     }
-  }).then((response)=> {
-    toastr('success','The Comment has been created successfully')
+  }).then((response) => {
+    toastr('success', 'The Comment has been created successfully')
     getpost(id)
-  }).catch((error)=> {
-   
-    toastr('error',error.response.data.message)
+  }).catch((error) => {
+
+    toastr('error', error.response.data.message)
   })
 
 }
